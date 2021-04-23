@@ -10,9 +10,13 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import HomeScreen from '../screens/HomeScreen';
+import search from '../screens/SearchScreen';
+import notification from '../screens/NotificationScreen';
+import messages from '../screens/MessageScreen';
+
+import { BottomTabParamList, HomeTabParamList, SearchTabParamList, NotifParamList, MessageParamList, RootStackParamList } from '../types';
+
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -21,22 +25,43 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Home"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Home"
+        component={HomeNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="md-home" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Search"
+        component={SearchNavigator}
         options={{
-          tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="ios-search" color={color} />,
         }}
       />
+
+      <BottomTab.Screen
+        name="Notification"
+        component={NotifTabNavigator}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="notifications-outline" color={color} />,
+        }}
+      />
+
+      <BottomTab.Screen
+        name="Message"
+        component={MsgTabNavigator}
+        options={{
+          title: '',
+          tabBarIcon: ({ color }) => <TabBarIcon name="mail-outline" color={color} />,
+        }}
+      />
+
     </BottomTab.Navigator>
   );
 }
@@ -44,35 +69,64 @@ export default function BottomTabNavigator() {
 // You can explore the built-in icon families and icons on the web at:
 // https://icons.expo.fyi/
 function TabBarIcon(props: { name: React.ComponentProps<typeof Ionicons>['name']; color: string }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  return <Ionicons size={24} style={{ marginBottom: -10 }} {...props} />;
 }
+
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const HomeStack = createStackNavigator<HomeTabParamList>();
 
-function TabOneNavigator() {
+function HomeNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
-        options={{ headerTitle: 'Tab One Title' }}
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen
+        name="homescreen"
+        component={HomeScreen}
+      // options={{ }}
       />
-    </TabOneStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const SearchStack = createStackNavigator<SearchTabParamList>();
 
-function TabTwoNavigator() {
+function SearchNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
-        options={{ headerTitle: 'Tab Two Title' }}
+    <SearchStack.Navigator>
+      <SearchStack.Screen
+        name="searchscreen"
+        component={search}
+        options={{ headerTitle: 'Search' }}
       />
-    </TabTwoStack.Navigator>
+    </SearchStack.Navigator>
+  );
+}
+
+const NotifTabStack = createStackNavigator<NotifParamList>();
+
+function NotifTabNavigator() {
+  return (
+    <NotifTabStack.Navigator>
+      <NotifTabStack.Screen
+        name="notification"
+        component={notification}
+        options={{ headerTitle: 'Notification' }}
+      />
+    </NotifTabStack.Navigator>
+  );
+}
+
+const MessageTabStack = createStackNavigator<MessageParamList>();
+
+function MsgTabNavigator() {
+  return (
+    <MessageTabStack.Navigator>
+      <MessageTabStack.Screen
+        name="message"
+        component={messages}
+        options={{ headerTitle: 'Messages' }}
+      />
+    </MessageTabStack.Navigator>
   );
 }

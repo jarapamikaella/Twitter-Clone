@@ -6,17 +6,32 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  TweetRoot: undefined;
 };
+
+export type TweetRootStackParamList = {
+  Tweet: {id: number};
+}
 
 export type BottomTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
+  Home: undefined;
+  Search: undefined;
+  Notification: undefined;
+  Message: undefined;
 };
 
-export type TabOneParamList = {
-  TabOneScreen: undefined;
+export type HomeTabParamList = {
+  homescreen: undefined;
 };
 
-export type TabTwoParamList = {
-  TabTwoScreen: undefined;
+export type SearchTabParamList = {
+  searchscreen: undefined;
+};
+
+export type NotifParamList = {
+  notification: undefined;
+};
+
+export type MessageParamList = {
+  message: undefined;
 };
