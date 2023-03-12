@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { Text, View } from './Themed';
 import { EvilIcons, Entypo, Octicons  } from '@expo/vector-icons';
 import { TouchableHighlight, } from 'react-native-gesture-handler';
-import styles from '../screens/styles';
+import styles from '../styles';
 
 const renderTweet = (item: any, navigation: any) => {
     return <TouchableHighlight key={item.id} underlayColor="#657786" onPress={() => navigation.navigate('TweetRoot', {screen:'Tweet', params: {id: item.id}})}>
@@ -18,7 +18,7 @@ const renderTweet = (item: any, navigation: any) => {
                     <View style={styles.tweetNameUsername}>
                         <Text style={styles.tweetName}>{item.name}</Text>
                         <Text style={{ color: 'grey' }}>{item.username}</Text>
-                        <Octicons style={{paddingTop: 6, marginHorizontal: 4}} name="primitive-dot" size={4} color="#657786" />
+                        {/* <Octicons style={{paddingTop: 6, marginHorizontal: 4}} name="primitive-dot" size={4} color="#657786" /> */}
                         <Text style={{color: '#657786'}}>{item.time}</Text>
                     </View>
                     <Entypo name="dots-three-vertical" size={12} color="black" />
